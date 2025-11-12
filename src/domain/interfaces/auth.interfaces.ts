@@ -5,9 +5,6 @@ export interface ILoginTenant {
 
 export interface ILoginRespuesta {
   token: string;
-  expiracion: string;
-  tenant_id: number;
-  usuario_id: number;
 }
 
 export interface IPayloadJwt {

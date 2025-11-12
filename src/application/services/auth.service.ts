@@ -44,15 +44,11 @@ export class AuthService implements IAuthService {
       correo: usuario.correo,
     };
 
-    const token = await this.jwtService.signAsync(payload);
-    const expiracion = new Date(Date.now() + DOCE_HORAS_EN_MILISEGUNDOS).toISOString();
+    const token = await this.jwtService.signAsync(payload, {
+      expiresIn: DOCE_HORAS_EN_MILISEGUNDOS / 1000,
+    });
 
-    return {
-      token,
-      expiracion,
-      tenant_id: usuario.tenant_id,
-      usuario_id: usuario.id,
-    };
+    return { token };
   }
 
   private lanzarCredencialesInvalidas(): never {
