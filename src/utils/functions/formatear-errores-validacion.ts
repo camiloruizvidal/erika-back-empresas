@@ -2,14 +2,14 @@ import { ValidationError } from 'class-validator';
 import { Constantes } from '../constantes';
 
 export function formatearErroresValidacion(
-  errores: ValidationError[]
+  errores: ValidationError[],
 ): string[] {
   const mensajesValidaciones: string[] = [];
 
-  errores.forEach(error => {
+  errores.forEach((error) => {
     if (error.constraints?.whitelistValidation) {
       error.constraints.whitelistValidation = Constantes.PROPIEDAD_NO_PERMITIDA(
-        error.property
+        error.property,
       );
     }
     if (error.children && error.children.length > 0) {

@@ -4,7 +4,7 @@ import {
   BadRequestException,
   GatewayTimeoutException,
   InternalServerErrorException,
-  UnprocessableEntityException
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { Constantes } from '../constantes';
 import { ErrorPersonalizado } from '../error-personalizado/error-personalizado';
@@ -18,7 +18,7 @@ export class ManejadorError {
     const esNoEncontrado = this.esNoEncontrado(error);
     const esTiempoExcedido = this.esTiempoExcedido(
       error,
-      mensajeTiempoExcedido
+      mensajeTiempoExcedido,
     );
     const esEntidadNoProcesable = this.esEntidadNoProcesable(error);
 

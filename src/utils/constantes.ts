@@ -1,8 +1,17 @@
 export class Constantes {
   static readonly LOCAL = 'local';
-  static readonly MENSAJE_TIEMPO_EXCEDIDO = 'El tiempo de 60000ms ha sido excedido';
+  static readonly MENSAJE_TIEMPO_EXCEDIDO =
+    'El tiempo de 60000ms ha sido excedido';
   static readonly CONEXION_ABORTADA = 'ECONNABORTED';
   static readonly MENSAJE_ERROR_INTERNO = 'Error interno en el servidor';
   static readonly PROPIEDAD_NO_PERMITIDA = (property: string) =>
     `${property} no es una propiedad permitida`;
+  static readonly PLAN_NO_ENCONTRADO =
+    'El plan seleccionado no está disponible';
+  static readonly FECHA_FIN_OBLIGATORIA =
+    'La fecha de finalización es obligatoria';
+  static readonly TENANT_YA_EXISTE =
+    'Ya existe un tenant registrado con ese NIT';
+  static readonly USUARIO_YA_EXISTE =
+    'Ya existe un usuario registrado con ese correo';
 }
