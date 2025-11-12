@@ -6,7 +6,6 @@ import {
   IPayloadJwt,
 } from '../../domain/interfaces/auth.interfaces';
 import { UserRepository } from '../../infrastructure/persistence/repositories/user.repository';
-import { IUserPersistencia } from '../../domain/interfaces/persistence.interfaces';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ErrorPersonalizado } from '../../utils/error-personalizado/error-personalizado';
@@ -27,7 +26,7 @@ export class AuthService implements IAuthService {
       this.lanzarCredencialesInvalidas();
     }
 
-    const usuario = usuarioEncontrado as IUserPersistencia;
+    const usuario = usuarioEncontrado;
 
     const contrasenaValida = await bcrypt.compare(
       datos.contrasena,
