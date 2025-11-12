@@ -5,6 +5,7 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
+  UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { Constantes } from '../constantes';
@@ -29,6 +30,10 @@ export class ManejadorError {
 
     if (ManejadorError.esPeticionIncorrecta(errorTipado)) {
       throw new BadRequestException(errorTipado.message);
+    }
+
+    if (ManejadorError.esNoAutorizado(errorTipado)) {
+      throw new UnauthorizedException(errorTipado.message);
     }
 
     if (ManejadorError.esNoEncontrado(errorTipado)) {
@@ -79,6 +84,10 @@ export class ManejadorError {
 
   private static esNoEncontrado(error: ErrorConStatus): boolean {
     return this.compararStatus(error, 404);
+  }
+
+  private static esNoAutorizado(error: ErrorConStatus): boolean {
+    return this.compararStatus(error, 401);
   }
 
   private static esTiempoExcedido(error: ErrorConStatus): boolean {

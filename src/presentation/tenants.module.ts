@@ -9,7 +9,7 @@ import { Config } from '../infrastructure/config/config';
   imports: [
     JwtModule.register({
       secret: Config.jwtKey,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '12h' },
     }),
   ],
   controllers: [TenantsController],
