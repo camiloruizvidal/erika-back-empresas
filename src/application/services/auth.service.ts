@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ErrorPersonalizado } from '../../utils/error-personalizado/error-personalizado';
 import { Constantes } from '../../utils/constantes';
 
-const DOCE_HORAS_EN_MILISEGUNDOS = 12 * 60 * 60 * 1000;
+const DOCE_HORAS_EN_SEGUNDOS = 12 * 60 * 60 * 1000;
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -45,7 +45,7 @@ export class AuthService implements IAuthService {
     };
 
     const token = await this.jwtService.signAsync(payload, {
-      expiresIn: DOCE_HORAS_EN_MILISEGUNDOS / 1000,
+      expiresIn: DOCE_HORAS_EN_SEGUNDOS / 1000,
     });
 
     return { token };
