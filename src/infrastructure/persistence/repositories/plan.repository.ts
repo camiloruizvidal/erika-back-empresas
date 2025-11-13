@@ -1,5 +1,6 @@
 import { PlanModel } from '../models/plan.model';
 import { IPlanPersistencia } from '../../../domain/interfaces/persistence.interfaces';
+import { Transformador } from '../../utils/transformador.util';
 
 export class PlanRepository {
   private constructor() {}
@@ -8,9 +9,6 @@ export class PlanRepository {
     id: number,
   ): Promise<IPlanPersistencia | null> {
     const plan = await PlanModel.findOne({ where: { id } });
-    if (!plan) {
-      return null;
-    }
-    return plan.get({ plain: true }) as IPlanPersistencia;
+    return Transformador.extraerDataValues(plan);
   }
 }

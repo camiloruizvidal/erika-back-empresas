@@ -49,7 +49,6 @@ export interface ITenantPlanPersistencia {
   monto_pagado: number | null;
   moneda: string;
   renovacion_automatica: boolean;
-  creado_por: string | null;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date | null;

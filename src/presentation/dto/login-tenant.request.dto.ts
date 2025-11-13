@@ -2,7 +2,7 @@ import { IsEmail, IsString, MinLength } from 'class-validator';
 import { Expose } from 'class-transformer';
 import { Constantes } from '../../utils/constantes';
 
-export class LoginTenantDto {
+export class LoginTenantRequestDto {
   @IsEmail(
     {},
     { message: Constantes.PROPIEDAD_NO_PERMITIDA('correo_contacto') },
@@ -15,3 +15,4 @@ export class LoginTenantDto {
   @Expose({ name: 'contrasena' })
   contrasena!: string;
 }
+

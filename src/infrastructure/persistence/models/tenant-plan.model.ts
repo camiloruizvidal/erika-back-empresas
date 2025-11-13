@@ -62,7 +62,4 @@ export class TenantPlanModel extends Model {
   @Default(true)
   @Column({ type: DataType.BOOLEAN })
   declare renovacion_automatica: boolean;
-
-  @Column({ type: DataType.STRING(150) })
-  declare creado_por: string | null;
 }

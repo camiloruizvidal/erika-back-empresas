@@ -1,5 +1,6 @@
 import { TenantPlanModel } from '../models/tenant-plan.model';
 import { ITenantPlanPersistencia } from '../../../domain/interfaces/persistence.interfaces';
+import { Transformador } from '../../utils/transformador.util';
 
 export class TenantPlanRepository {
   private constructor() {}
@@ -8,6 +9,6 @@ export class TenantPlanRepository {
     datos: Partial<ITenantPlanPersistencia>,
   ): Promise<ITenantPlanPersistencia> {
     const registro = await TenantPlanModel.create(datos);
-    return registro.get({ plain: true }) as ITenantPlanPersistencia;
+    return Transformador.extraerDataValues(registro);
   }
 }

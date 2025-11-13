@@ -10,32 +10,9 @@ import {
 } from 'class-validator';
 import { Expose, Transform } from 'class-transformer';
 import { Constantes } from '../../utils/constantes';
+import { TransformadoresDto } from '../utils/transformadores-dto.helper';
 
-type EntradaNumerica = string | number | null | undefined;
-type EntradaBooleana = string | number | boolean | null | undefined;
-
-const transformarNumero = (valor: EntradaNumerica): number | undefined => {
-  if (valor === undefined || valor === null || valor === '') {
-    return undefined;
-  }
-  return typeof valor === 'number' ? valor : Number(valor);
-};
-
-const transformarBooleano = (valor: EntradaBooleana): boolean | undefined => {
-  if (valor === undefined || valor === null || valor === '') {
-    return undefined;
-  }
-  if (typeof valor === 'boolean') {
-    return valor;
-  }
-  if (typeof valor === 'number') {
-    return valor === 1;
-  }
-  const valorNormalizado = valor.toString().toLowerCase();
-  return valorNormalizado === 'true' || valorNormalizado === '1';
-};
-
-export class RegisterTenantDto {
+export class RegisterTenantRequestDto {
   @IsString({ message: Constantes.PROPIEDAD_NO_PERMITIDA('nombre') })
   @MinLength(2)
   @Expose({ name: 'nombre' })
@@ -96,7 +73,7 @@ export class RegisterTenantDto {
   @Expose({ name: 'sitio_web' })
   sitioWeb?: string;
 
-  @Transform(({ value }) => transformarNumero(value))
+  @Transform(({ value }) => TransformadoresDto.transformarNumero(value))
   @IsNumber({}, { message: Constantes.PROPIEDAD_NO_PERMITIDA('plan_id') })
   @Expose({ name: 'plan_id' })
   planId!: number;
@@ -107,7 +84,7 @@ export class RegisterTenantDto {
   estadoSuscripcion?: string;
 
   @IsNotEmpty({ message: Constantes.FECHA_FIN_OBLIGATORIA })
-  @Transform(({ value }) => (value ? new Date(value) : value))
+  @Transform(({ value }) => TransformadoresDto.transformarFecha(value))
   @IsDate({ message: Constantes.FECHA_FIN_OBLIGATORIA })
   @Expose({ name: 'fecha_fin' })
   fechaFin!: Date;
@@ -118,7 +95,7 @@ export class RegisterTenantDto {
   referenciaPago?: string;
 
   @IsOptional()
-  @Transform(({ value }) => transformarNumero(value))
+  @Transform(({ value }) => TransformadoresDto.transformarNumero(value))
   @IsNumber({}, { message: Constantes.PROPIEDAD_NO_PERMITIDA('monto_pagado') })
   @Expose({ name: 'monto_pagado' })
   montoPagado?: number;
@@ -129,17 +106,12 @@ export class RegisterTenantDto {
   moneda?: string;
 
   @IsOptional()
-  @Transform(({ value }) => transformarBooleano(value))
+  @Transform(({ value }) => TransformadoresDto.transformarBooleano(value))
   @IsBoolean({
     message: Constantes.PROPIEDAD_NO_PERMITIDA('renovacion_automatica'),
   })
   @Expose({ name: 'renovacion_automatica' })
   renovacionAutomatica?: boolean;
-
-  @IsOptional()
-  @IsString({ message: Constantes.PROPIEDAD_NO_PERMITIDA('creado_por') })
-  @Expose({ name: 'creado_por' })
-  creadoPor?: string;
 
   @IsString({ message: Constantes.PROPIEDAD_NO_PERMITIDA('contrasena') })
   @MinLength(8)

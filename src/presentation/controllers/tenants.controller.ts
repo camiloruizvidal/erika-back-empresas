@@ -1,10 +1,10 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { RegisterTenantDto } from '../dto/register-tenant.dto';
+import { RegisterTenantRequestDto } from '../dto/register-tenant.request.dto';
 import { TenantsService } from '../../application/services/tenants.service';
 import { RegisterTenantMapper } from '../../shared/mappings/register-tenant.mapper';
 import { ManejadorError } from '../../utils/manejador-error/manejador-error';
-import { TenantRegistradoDto } from '../dto/tenant-registrado.dto';
+import { TenantRegistradoResponseDto } from '../dto/tenant-registrado.response.dto';
 import { plainToInstance } from 'class-transformer';
 import { ITenantRegistrado } from '../../domain/interfaces/register-tenant.interface';
 
@@ -18,16 +18,16 @@ export class TenantsController {
 
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
-  @ApiBody({ type: RegisterTenantDto })
-  @ApiCreatedResponse({ type: TenantRegistradoDto })
+  @ApiBody({ type: RegisterTenantRequestDto })
+  @ApiCreatedResponse({ type: TenantRegistradoResponseDto })
   public async registrar(
-    @Body() dto: RegisterTenantDto,
-  ): Promise<TenantRegistradoDto> {
+    @Body() dto: RegisterTenantRequestDto,
+  ): Promise<TenantRegistradoResponseDto> {
     try {
       const payload = RegisterTenantMapper.toInterface(dto);
       const resultado: ITenantRegistrado =
         await this.tenantsService.registrarTenant(payload);
-      return plainToInstance(TenantRegistradoDto, resultado);
+      return plainToInstance(TenantRegistradoResponseDto, resultado);
     } catch (error) {
       this.manejadorError.resolverErrorApi(error);
       throw error;

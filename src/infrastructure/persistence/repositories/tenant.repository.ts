@@ -1,5 +1,6 @@
 import { TenantModel } from '../models/tenant.model';
 import { ITenantPersistencia } from '../../../domain/interfaces/persistence.interfaces';
+import { Transformador } from '../../utils/transformador.util';
 
 export class TenantRepository {
   private constructor() {}
@@ -8,17 +9,14 @@ export class TenantRepository {
     nit: string,
   ): Promise<ITenantPersistencia | null> {
     const registro = await TenantModel.findOne({ where: { nit } });
-    if (!registro) {
-      return null;
-    }
-    return registro.get({ plain: true }) as ITenantPersistencia;
+    return Transformador.extraerDataValues(registro);
   }
 
   public static async crearTenant(
     datos: Partial<ITenantPersistencia>,
   ): Promise<ITenantPersistencia> {
     const registro = await TenantModel.create(datos);
-    return registro.get({ plain: true }) as ITenantPersistencia;
+    return Transformador.extraerDataValues(registro);
   }
 
   public static async actualizarPlanActivo(

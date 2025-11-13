@@ -1,10 +1,12 @@
-import { RegisterTenantDto } from '../../presentation/dto/register-tenant.dto';
+import { RegisterTenantRequestDto } from '../../presentation/dto/register-tenant.request.dto';
 import { IRegistrarTenant } from '../../domain/interfaces/register-tenant.interface';
 
 export class RegisterTenantMapper {
   private constructor() {}
 
-  public static toInterface(dto: RegisterTenantDto): IRegistrarTenant {
+  public static toInterface(
+    dto: RegisterTenantRequestDto,
+  ): IRegistrarTenant {
     return {
       nombre: dto.nombre,
       razonSocial: dto.razonSocial,
@@ -25,7 +27,6 @@ export class RegisterTenantMapper {
       montoPagado: dto.montoPagado,
       moneda: dto.moneda,
       renovacionAutomatica: dto.renovacionAutomatica,
-      creadoPor: dto.creadoPor,
       contrasena: dto.contrasena,
     };
   }

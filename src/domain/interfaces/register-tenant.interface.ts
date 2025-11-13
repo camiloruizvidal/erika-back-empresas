@@ -18,7 +18,6 @@ export interface IRegistrarTenant {
   montoPagado?: number;
   moneda?: string;
   renovacionAutomatica?: boolean;
-  creadoPor?: string;
   contrasena: string;
 }
 

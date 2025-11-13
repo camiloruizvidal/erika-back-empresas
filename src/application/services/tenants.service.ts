@@ -90,7 +90,6 @@ export class TenantsService implements ITenantsService {
         monto_pagado: payload.montoPagado ?? null,
         moneda: payload.moneda ?? planSeleccionado.moneda ?? 'COP',
         renovacion_automatica: payload.renovacionAutomatica ?? true,
-        creado_por: payload.creadoPor ?? null,
       });
 
     await TenantRepository.actualizarPlanActivo(
