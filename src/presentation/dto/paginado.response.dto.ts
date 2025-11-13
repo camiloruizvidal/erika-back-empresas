@@ -16,6 +16,13 @@ export class MetaPaginadoResponseDto {
   })
   @Expose({ name: 'tamanoPagina' })
   tamano_pagina!: number;
+
+  @ApiProperty({
+    description: 'Cantidad total de páginas calculadas para la consulta',
+    type: Number,
+  })
+  @Expose({ name: 'totalPaginas' })
+  total_paginas!: number;
 }
 
 export class PaginadoResponseDto<T> {
