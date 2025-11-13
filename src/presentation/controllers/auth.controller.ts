@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Logger,
+  Post,
+} from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { LoginTenantRequestDto } from '../dto/login-tenant.request.dto';
 import { AuthService } from '../../application/services/auth.service';
@@ -29,6 +36,7 @@ export class AuthController {
         excludeExtraneousValues: true,
       });
     } catch (error) {
+      Logger.error({ error: JSON.stringify(error) });
       this.manejadorError.resolverErrorApi(error);
     }
   }

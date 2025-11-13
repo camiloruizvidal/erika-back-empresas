@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Logger,
+  Post,
+} from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { RegisterTenantRequestDto } from '../dto/register-tenant.request.dto';
 import { TenantsService } from '../../application/services/tenants.service';
@@ -29,6 +36,7 @@ export class TenantsController {
         await this.tenantsService.registrarTenant(payload);
       return plainToInstance(TenantRegistradoResponseDto, resultado);
     } catch (error) {
+      Logger.error({ error: JSON.stringify(error) });
       this.manejadorError.resolverErrorApi(error);
       throw error;
     }
