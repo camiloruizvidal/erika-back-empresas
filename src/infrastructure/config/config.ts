@@ -19,3 +19,17 @@ export class Config {
   static readonly jwtKey = process.env.JWT_KEY;
   static readonly bcryptSaltRounds = Number(process.env.BCRYPT_SALT_ROUNDS);
 }
+
+const errors: string[] = [];
+Object.keys(Config).forEach((key) => {
+  if (
+    Config[key] === null ||
+    Config[key] === undefined ||
+    `${Config[key]}`.trim() === ''
+  ) {
+    errors.push(`La variable de entorno ${key} es requerida`);
+  }
+});
+if (errors.length > 0) {
+  throw new Error(errors.join('\n'));
+}
