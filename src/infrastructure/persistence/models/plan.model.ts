@@ -25,41 +25,41 @@ export class PlanModel extends Model {
 
   @AllowNull(false)
   @Column({ type: DataType.STRING(50) })
-  nombre!: string;
+  declare nombre: string;
 
   @AllowNull(true)
   @Column({ type: DataType.TEXT })
-  descripcion?: string;
+  declare descripcion?: string;
 
   @AllowNull(false)
   @Column({ type: DataType.DECIMAL(12, 2) })
-  precio!: number;
+  declare precio: number;
 
   @AllowNull(false)
   @Column({ type: DataType.STRING(20) })
-  periodo!: string;
+  declare periodo: string;
 
   @Default(10)
   @Column({ type: DataType.INTEGER })
-  limite_clientes!: number;
+  declare limite_clientes: number;
 
   @Default(10)
   @Column({ type: DataType.INTEGER })
-  limite_servicios!: number;
+  declare limite_servicios: number;
 
   @Default(100)
   @Column({ type: DataType.INTEGER })
-  limite_facturas!: number;
+  declare limite_facturas: number;
 
   @Default(0)
   @Column({ type: DataType.DECIMAL(5, 2) })
-  comision!: number;
+  declare comision: number;
 
   @Default('COP')
   @Column({ type: DataType.STRING(10) })
-  moneda!: string;
+  declare moneda: string;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN })
-  activo!: boolean;
+  declare activo: boolean;
 }
