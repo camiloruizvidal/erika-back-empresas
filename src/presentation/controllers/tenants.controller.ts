@@ -18,6 +18,8 @@ import { ITenantRegistrado } from '../../domain/interfaces/register-tenant.inter
 @ApiTags('tenants')
 @Controller('api/v1/tenants')
 export class TenantsController {
+  private readonly logger = new Logger(TenantsController.name);
+
   constructor(
     private readonly tenantsService: TenantsService,
     private readonly manejadorError: ManejadorError,
@@ -36,7 +38,7 @@ export class TenantsController {
         await this.tenantsService.registrarTenant(payload);
       return plainToInstance(TenantRegistradoResponseDto, resultado);
     } catch (error) {
-      Logger.error({ error: JSON.stringify(error) });
+      this.logger.error({ error: JSON.stringify(error) });
       this.manejadorError.resolverErrorApi(error);
       throw error;
     }

@@ -17,6 +17,8 @@ import { plainToInstance } from 'class-transformer';
 @ApiTags('auth')
 @Controller('api/v1/auth')
 export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
+
   constructor(
     private readonly authService: AuthService,
     private readonly manejadorError: ManejadorError,
@@ -36,7 +38,7 @@ export class AuthController {
         excludeExtraneousValues: true,
       });
     } catch (error) {
-      Logger.error({ error: JSON.stringify(error) });
+      this.logger.error({ error: JSON.stringify(error) });
       this.manejadorError.resolverErrorApi(error);
     }
   }
